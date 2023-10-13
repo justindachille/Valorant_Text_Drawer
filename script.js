@@ -70,33 +70,41 @@ window.addEventListener('load', () => {
         ctx.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
       }
   
-    window.convertToAscii = () => {
-      let asciiArt = '';
+      window.convertToAscii = () => {
+        let asciiArt = '';
     
-      // Calculate step sizes based on canvas dimensions and desired ASCII dimensions (26x12)
-      const xStep = canvas.width / 26;
-      const yStep = canvas.height / 12;
+        // Set steps to represent the canvas dimensions for 26x12 blocks
+        const xStep = canvas.width / 26;
+        const yStep = canvas.height / 24;  // 24 instead of 12 to check half-height
     
-      for (let y = 0; y < canvas.height; y += yStep) {
-        for (let x = 0; x < canvas.width; x += xStep) {
-          const pixel = ctx.getImageData(x, y, 1, 1).data;
-          const alpha = pixel[3];
-          const grayscale = (pixel[0] + pixel[1] + pixel[2]) / 3 * (alpha / 255.0);
+        for (let y = 0; y < canvas.height; y += 2 * yStep) {
+            for (let x = 0; x < canvas.width; x += xStep) {
     
-          // Map grayscale values to specialized ASCII characters
-          if (grayscale < 64) {
-            asciiArt += '█';
-          } else if (grayscale < 128) {
-            asciiArt += '▄';
-          } else if (grayscale < 192) {
-            asciiArt += '▀';
-          } else {
-            asciiArt += '░';
-          }
+                // Get grayscale for top and bottom halves
+                const topHalfPixel = ctx.getImageData(x, y, 1, 1).data;
+                const bottomHalfPixel = ctx.getImageData(x, y + yStep, 1, 1).data;
+    
+                const topHalfGray = (topHalfPixel[0] + topHalfPixel[1] + topHalfPixel[2]) / 3 * (topHalfPixel[3] / 255.0);
+                const bottomHalfGray = (bottomHalfPixel[0] + bottomHalfPixel[1] + bottomHalfPixel[2]) / 3 * (bottomHalfPixel[3] / 255.0);
+    
+                // Determine which halves are filled
+                const topFilled = topHalfGray < 128;
+                const bottomFilled = bottomHalfGray < 128;
+    
+                // Add appropriate ASCII character
+                if (topFilled && bottomFilled) {
+                    asciiArt += '█';
+                } else if (topFilled) {
+                    asciiArt += '▀';
+                } else if (bottomFilled) {
+                    asciiArt += '▄';
+                } else {
+                    asciiArt += '░';
+                }
+            }
+            asciiArt += '\n';
         }
-        asciiArt += '\n';
-      }
-      document.getElementById('asciiArt').textContent = asciiArt;
+        document.getElementById('asciiArt').textContent = asciiArt;
     };
   });
   
