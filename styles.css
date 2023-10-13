@@ -1,0 +1,21 @@
+.container {
+    text-align: center;
+  }
+  
+  #drawCanvas {
+    border: 2px solid black;
+    display: block;
+    margin: auto;
+  }
+  
+  .button-container {
+    margin-top: 10px;
+  }
+  
+  #asciiArt {
+    border: 1px solid black;
+    display: inline-block;
+    margin: 10px auto;
+    white-space: pre-wrap;
+  }
+  
