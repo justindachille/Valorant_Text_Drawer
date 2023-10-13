@@ -44,9 +44,10 @@ window.addEventListener('load', () => {
     // Resize canvas when window resizes (optional)
     window.addEventListener('resize', setCanvasSize);
 
-    canvas.addEventListener('mouseup', () => {
-      drawing = false;
-      ctx.beginPath();
+    window.addEventListener('mouseup', () => {
+        drawing = false;
+        ctx.beginPath();
+        clearInterval(livePreviewInterval);
     });
   
     canvas.addEventListener('mousemove', draw);
