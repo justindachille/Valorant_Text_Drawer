@@ -4,13 +4,20 @@ window.addEventListener('load', () => {
     const ctx = canvas.getContext('2d');
     let penSize = 40;
     let drawing = false;
+    let livePreviewInterval;
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     canvas.addEventListener('mousedown', () => {
-      drawing = true;
-    });
-
+        drawing = true;
+        livePreviewInterval = setInterval(convertToAscii, 100);
+      });
+      
+      canvas.addEventListener('mouseup', () => {
+        drawing = false;
+        ctx.beginPath();
+        clearInterval(livePreviewInterval);
+      });
     penSizeSlider.addEventListener('input', function() {
         penSize = this.value;
     });
