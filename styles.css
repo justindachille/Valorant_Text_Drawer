@@ -12,10 +12,14 @@
     margin-top: 10px;
   }
   
+  #penSizeSlider {
+    display: inline-block;
+    margin: 10px auto;
+  }
+  
   #asciiArt {
     border: 1px solid black;
     display: inline-block;
     margin: 10px auto;
     white-space: pre-wrap;
   }
-  

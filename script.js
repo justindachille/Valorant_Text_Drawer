@@ -1,6 +1,8 @@
 window.addEventListener('load', () => {
     const canvas = document.getElementById('drawCanvas');
+    const penSizeSlider = document.getElementById('penSizeSlider');
     const ctx = canvas.getContext('2d');
+    let penSize = 40;
     let drawing = false;
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -8,6 +10,12 @@ window.addEventListener('load', () => {
     canvas.addEventListener('mousedown', () => {
       drawing = true;
     });
+
+    penSizeSlider.addEventListener('input', function() {
+        penSize = this.value;
+    });
+
+
   
     function setCanvasSize() {
       const maxWidth = window.innerWidth * 0.5;
@@ -43,16 +51,17 @@ window.addEventListener('load', () => {
     };
 
     function draw(event) {
-      if (!drawing) return;
-      ctx.lineWidth = 40;
-      ctx.lineCap = 'round';
-      ctx.strokeStyle = 'black';
+        if (!drawing) return;
+        
+        ctx.lineWidth = penSize;  // Use dynamic pen size
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = 'black';
       
-      ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
-    }
+        ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+      }
   
     window.convertToAscii = () => {
       let asciiArt = '';
@@ -84,3 +93,12 @@ window.addEventListener('load', () => {
     };
   });
   
+
+function copyToClipboard() {
+    const el = document.createElement('textarea');
+    el.value = document.getElementById('asciiArt').textContent;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+}

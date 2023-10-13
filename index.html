@@ -5,6 +5,7 @@
   <title>Draw and Convert to ASCII</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
   <script src="script.js" defer></script>
+  
 </head>
 <body>
   <div class="container">
@@ -13,6 +14,9 @@
       <button onclick="convertToAscii()">Convert to ASCII</button>
       <button onclick="resetCanvas()">Reset Canvas</button>
     </div>
+    <input type="range" id="penSizeSlider" min="30" max="65" value="50">
+    <button onclick="copyToClipboard()">Copy All</button>
+    <label for="penSizeSlider">Pen Size</label>
     <pre id="asciiArt"></pre>
   </div>
 </body>
