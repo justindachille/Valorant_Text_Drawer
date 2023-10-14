@@ -1,11 +1,12 @@
 .container {
     text-align: center;
+    padding: 20px;
   }
   
   #drawCanvas {
-    border: 2px solid black;
-    display: block;
-    margin: auto;
+    border: 2px solid #ffffff;
+    background-color: #D3D3D3; /* Cooler tone that contrasts with black */
+    margin: 20px;
   }
   
   .button-container {
@@ -17,9 +18,19 @@
     margin: 10px auto;
   }
   
-  #asciiArt {
-    border: 1px solid black;
-    display: inline-block;
-    margin: 10px auto;
-    white-space: pre-wrap;
+  button, textarea, #asciiArt {
+    background-color: #4a4a4a;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 3px;
+  }
+
+  body {
+    background-color: #1a1a1a; /* Even darker background */
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
   }

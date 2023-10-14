@@ -105,11 +105,22 @@ window.addEventListener('load', () => {
               }
             }
       
+            // Mapping conditions to ASCII block characters
             if (topHalf === 2 && bottomHalf === 2) asciiArt += '█';
             else if (topHalf === 2) asciiArt += '▀';
             else if (bottomHalf === 2) asciiArt += '▄';
             else if (leftHalf === 2) asciiArt += '▌';
             else if (rightHalf === 2) asciiArt += '▐';
+            else if (topHalf === 1 && leftHalf === 1) asciiArt += '▘';
+            else if (topHalf === 1 && rightHalf === 1) asciiArt += '▝';
+            else if (bottomHalf === 1 && leftHalf === 1) asciiArt += '▖';
+            else if (bottomHalf === 1 && rightHalf === 1) asciiArt += '▗';
+            else if (topHalf === 1 && bottomHalf === 1 && leftHalf === 1) asciiArt += '▛';
+            else if (topHalf === 1 && bottomHalf === 1 && rightHalf === 1) asciiArt += '▜';
+            else if (topHalf === 1 && leftHalf === 1 && rightHalf === 1) asciiArt += '▟';
+            else if (bottomHalf === 1 && leftHalf === 1 && rightHalf === 1) asciiArt += '▙';
+            else if (topHalf === 1 && bottomHalf === 1) asciiArt += '▚';
+            else if (leftHalf === 1 && rightHalf === 1) asciiArt += '▞';
             else asciiArt += '░';
           }
           asciiArt += '\n';

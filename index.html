@@ -11,13 +11,12 @@
   <div class="container">
     <canvas id="drawCanvas"></canvas>
     <div class="button-container">
-      <button onclick="convertToAscii()">Convert to ASCII</button>
       <button onclick="resetCanvas()">Reset Canvas</button>
     </div>
     <input type="range" id="penSizeSlider" min="30" max="100" value="50">
-    <button onclick="copyToClipboard()">Copy All</button>
     <label for="penSizeSlider">Pen Size</label>
     <pre id="asciiArt"></pre>
+    <button onclick="copyToClipboard()">Copy All</button>
   </div>
 </body>
 </html>
