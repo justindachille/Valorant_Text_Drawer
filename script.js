@@ -78,26 +78,23 @@ window.addEventListener('load', () => {
       ctx.fillStyle = "white";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
-      window.convertToAscii = () => {
+    
+    window.convertToAscii = () => {
         let asciiArt = '';
         const asciiColumns = 26;
         const asciiRows = 12;
-      
         const xStep = canvas.width / (asciiColumns * 2);
         const yStep = canvas.height / (asciiRows * 2);
       
         for (let y = 0; y < asciiRows * 2; y += 2) {
           for (let x = 0; x < asciiColumns * 2; x += 2) {
-      
-            let topHalf = 0;
-            let bottomHalf = 0;
-            let leftHalf = 0;
-            let rightHalf = 0;
+            let topHalf = 0, bottomHalf = 0, leftHalf = 0, rightHalf = 0;
       
             for (let subY = 0; subY < 2; subY++) {
               for (let subX = 0; subX < 2; subX++) {
                 const pixel = ctx.getImageData(x * xStep + subX * xStep / 2, y * yStep + subY * yStep / 2, 1, 1).data;
                 const grayscale = (pixel[0] + pixel[1] + pixel[2]) / 3;
+      
                 if (grayscale < 128) {
                   if (subY === 0) topHalf++;
                   if (subY === 1) bottomHalf++;
@@ -107,19 +104,12 @@ window.addEventListener('load', () => {
               }
             }
       
-            if (topHalf === 2 && bottomHalf === 2) {
-              asciiArt += '█';
-            } else if (topHalf === 2) {
-              asciiArt += '▀';
-            } else if (bottomHalf === 2) {
-              asciiArt += '▄';
-            } else if (leftHalf === 2) {
-              asciiArt += '▌';
-            } else if (rightHalf === 2) {
-              asciiArt += '▐';
-            } else {
-              asciiArt += '░';
-            }
+            if (topHalf === 2 && bottomHalf === 2) asciiArt += '█';
+            else if (topHalf === 2) asciiArt += '▀';
+            else if (bottomHalf === 2) asciiArt += '▄';
+            else if (leftHalf === 2) asciiArt += '▌';
+            else if (rightHalf === 2) asciiArt += '▐';
+            else asciiArt += '░';
           }
           asciiArt += '\n';
         }
